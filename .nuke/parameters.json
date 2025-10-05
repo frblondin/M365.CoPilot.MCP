@@ -1,0 +1,4 @@
+{
+  "$schema": "build.schema.json",
+  "Solution": "M365.CoPilot.MCP.sln"
+}
