@@ -1,6 +1,6 @@
 # M365 CoPilot MCP Server
 
-[![NuGet](https://img.shields.io/badge/NuGet-004880?logo=nuget&logoColor=fff)](https://www.nuget.org/packages/M365.CoPilot.MCP)
+![NuGet Version](https://img.shields.io/nuget/vpre/M365.CoPilot.MCP)
 [![.NET](https://img.shields.io/badge/.NET-10.0-purple.svg)](https://dotnet.microsoft.com/)
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Model_Context_Protocol_logo.png" width="19" alt="MCP"/>
 
@@ -17,7 +17,7 @@ A **Model Context Protocol (MCP) Server** that provides secure and compliant acc
 
 ## 📋 Prerequisites
 
-- **.NET 10 SDK** or later
+- **.NET 10 SDK** or later: [Download .NET](https://dotnet.microsoft.com/en-us/download)
 - **Azure AD Application** with appropriate permissions
 - **Microsoft 365 Copilot license** (for retrieval functionality)
 - **Windows, macOS, or Linux** environment
@@ -43,10 +43,10 @@ To use this MCP server with GitHub Copilot, configure your MCP settings file:
 ```json
 {
   "mcpServers": {
-    "microsoft-graph-dev": {
+    "m365-copilot": {
       "command": "dnx",
       "args": [
-         "--prerelease", "M365.CoPilot.MCP",
+         "--yes", "--prerelease", "M365.CoPilot.MCP",
          "--tenant-id", "your-dev-tenant-id",
          "--client-id", "your-dev-client-id",
          "--scopes", "Files.Read.All Sites.Read.All ExternalItem.Read.All"
@@ -61,7 +61,7 @@ This allows you to test changes immediately without publishing or installing pac
 ```json
 {
   "mcpServers": {
-    "microsoft-graph-dev": {
+    "m365-copilot-dev": {
       "command": "C:\\path\\to\\your\\repo\\M365.CoPilot.MCP\\M365.CoPilot.MCP\\bin\\Debug\\net10.0\\M365.CoPilot.MCP.exe",
       "args": [
          "--tenant-id", "your-dev-tenant-id",
