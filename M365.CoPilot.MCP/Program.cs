@@ -30,6 +30,7 @@ static class Program
             .AddSingleton(client)
             .Configure<CoPilotMcpOptions>(o => o.Scopes = scopes)
             .AddMcpServer()
+            .WithPrompts<CoPilotPrompts>()
             .WithStdioServerTransport()
             .WithToolsFromAssembly();
 

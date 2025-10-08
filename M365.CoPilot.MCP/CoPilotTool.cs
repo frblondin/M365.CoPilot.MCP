@@ -6,7 +6,7 @@ using ModelContextProtocol.Server;
 using System.ComponentModel;
 using System.Text.Json;
 
-namespace M365.CoPilot.MCP.Tools;
+namespace M365.CoPilot.MCP;
 
 [McpServerToolType]
 public static class CoPilotTool
