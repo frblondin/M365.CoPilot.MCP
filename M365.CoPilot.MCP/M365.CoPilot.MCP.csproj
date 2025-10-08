@@ -8,6 +8,7 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <Description>A Model Context Protocol (MCP) Server that provides secure and compliant access to Microsoft 365 knowledge systems through Microsoft Graph and Copilot Retrieval APIs. This server enables AI assistants to retrieve relevant information from internal systems like Confluence, Jira, Azure DevOps, Salesforce, and other connected data sources.</Description>
         <PackAsTool>true</PackAsTool>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
