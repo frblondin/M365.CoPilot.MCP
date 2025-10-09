@@ -13,8 +13,7 @@ public class CoPilotPrompts()
         string topic)
     {
         var query = $"project documentation best practices guidelines standards for {topic}";
-        return Task.FromResult(GenerateSyntheticToolCall(query, @"
-**Key sections to include:**
+        return Task.FromResult(GenerateResearchPrompt(query, topic, @"
 - 🎯 Overview and relevance
 - 🏗️ Architecture & design principles  
 - 📋 Development standards and best practices
@@ -29,8 +28,7 @@ public class CoPilotPrompts()
         string issue)
     {
         var query = $"troubleshooting guide solution fix error resolution for {issue}";
-        return Task.FromResult(GenerateSyntheticToolCall(query, @"
-**Key sections to include:**
+        return Task.FromResult(GenerateResearchPrompt(query, issue, @"
 - 🔍 Problem description and symptoms
 - 🎯 Quick diagnosis steps
 - 🛠️ Solution steps (primary and alternative)
@@ -45,8 +43,7 @@ public class CoPilotPrompts()
         string technology)
     {
         var query = $"coding standards guidelines architecture best practices conventions for {technology}";
-        return Task.FromResult(GenerateSyntheticToolCall(query, @"
-**Key sections to include:**
+        return Task.FromResult(GenerateResearchPrompt(query, technology, @"
 - 🏗️ Architecture guidelines and patterns
 - 📝 Coding conventions and style
 - 🔍 Code quality standards and review checklist
@@ -61,8 +58,7 @@ public class CoPilotPrompts()
         string process)
     {
         var query = $"business process workflow procedure documentation for {process}";
-        return Task.FromResult(GenerateSyntheticToolCall(query, @"
-**Key sections to include:**
+        return Task.FromResult(GenerateResearchPrompt(query, process, @"
 - 📋 Process overview and stakeholders
 - 🔄 Process flow with clear phases
 - 👥 Roles and responsibilities
@@ -77,8 +73,7 @@ public class CoPilotPrompts()
         string topic)
     {
         var query = $"market analysis competitor intelligence business research insights for {topic}";
-        return Task.FromResult(GenerateSyntheticToolCall(query, @"
-**Key sections to include:**
+        return Task.FromResult(GenerateResearchPrompt(query, topic, @"
 - 🎯 Executive summary with key insights
 - 🏪 Market landscape and positioning
 - 🏢 Competitor analysis and threats
@@ -93,8 +88,7 @@ public class CoPilotPrompts()
         string procedure)
     {
         var query = $"DevOps procedures deployment guide infrastructure documentation for {procedure}";
-        return Task.FromResult(GenerateSyntheticToolCall(query, @"
-**Key sections to include:**
+        return Task.FromResult(GenerateResearchPrompt(query, procedure, @"
 - 🎯 Procedure overview and prerequisites
 - 🚀 Step-by-step process (prep, execution, post)
 - 🛠️ Tools and resources required
@@ -109,8 +103,7 @@ public class CoPilotPrompts()
         string complianceArea)
     {
         var query = $"compliance documentation audit procedures regulatory guidelines for {complianceArea}";
-        return Task.FromResult(GenerateSyntheticToolCall(query, @"
-**Key sections to include:**
+        return Task.FromResult(GenerateResearchPrompt(query, complianceArea, @"
 - 📋 Compliance overview and scope
 - 📜 Regulatory requirements and standards
 - ✅ Compliance checklist and procedures
@@ -125,8 +118,7 @@ public class CoPilotPrompts()
         string trainingTopic)
     {
         var query = $"training resources learning materials onboarding guides for {trainingTopic}";
-        return Task.FromResult(GenerateSyntheticToolCall(query, @"
-**Key sections to include:**
+        return Task.FromResult(GenerateResearchPrompt(query, trainingTopic, @"
 - 🎯 Learning objectives and outcomes
 - 📚 Core learning materials and resources
 - 🛤️ Structured learning path by level
@@ -141,8 +133,7 @@ public class CoPilotPrompts()
         string insightArea)
     {
         var query = $"customer insights feedback survey results user research findings for {insightArea}";
-        return Task.FromResult(GenerateSyntheticToolCall(query, @"
-**Key sections to include:**
+        return Task.FromResult(GenerateResearchPrompt(query, insightArea, @"
 - 📊 Executive summary with key findings
 - 🔍 Customer feedback analysis and metrics
 - 📈 Trends and behavioral patterns
@@ -157,8 +148,7 @@ public class CoPilotPrompts()
         string integrationArea)
     {
         var query = $"integration patterns API documentation system integration guides for {integrationArea}";
-        return Task.FromResult(GenerateSyntheticToolCall(query, @"
-**Key sections to include:**
+        return Task.FromResult(GenerateResearchPrompt(query, integrationArea, @"
 - 🎯 Integration overview and business purpose
 - 🏗️ Architecture patterns and alternatives
 - 🛠️ Implementation guide with code examples
@@ -166,34 +156,38 @@ public class CoPilotPrompts()
 - 📋 Best practices and error handling"));
     }
 
-    private static string GenerateSyntheticToolCall(string query, string format)
+    private static string GenerateResearchPrompt(string query, string topic, string format)
     {
-        var parts = new List<string>
-        {
-            // Add the main search query
-            $"📋 **Search Query:** `{query}`"
-        };
-        
-        // Create the tool call instruction with format guidance
-        var toolCallInstruction = $@"## 🔍 Search Knowledge Base
+        return $@"You are conducting research on ""{topic}"". Please perform the following research steps and provide a comprehensive response:
 
-{string.Join("\n", parts)}
+## Step 1: Search Internal Knowledge Base
+Use the Retrieve tool to search for internal documentation and resources:
 
-**To execute this search, use:**
 ```
-#Retrieve ""{query}""
+#Retrieve: ""{query}""
 ```
 
-*This will search your organization's knowledge repositories for relevant documentation and resources.*
+## Step 2: Gather Additional Web Context  
+Use the get_web_pages tool to research current best practices and industry standards related to ""{topic}"". Search for:
+- 🔍 Recent industry articles and documentation
+- 🧱 Official framework/technology documentation
+- 📘 Best practice guides from reputable sources
 
----
+## Step 3: Synthesize Information
+Combine the internal and external research to provide a comprehensive response in this format:{format}
+- 📎 Provide Sources and References
+   - 🔗 **Internal Sources:** [Title](URL) - Last updated: Date
+   - 🌐 **External Sources:** [Title](URL) - Accessed: Date  
+   - 📋 **Related Documentation:** Links to additional relevant resources
+   - ⚡ **Quick Access:** Direct links to most actionable content
 
-## 📝 Expected Response Format
+## Research Quality Requirements:
+✔️ All claims must be backed by credible sources
+✔️ Provide working links for all referenced materials
+✔️ Ensure information is current and relevant
+✔️ Clearly identify any gaps in available knowledge
+✔️ Include specific, actionable next steps
 
-After executing the tool call, please format the response using the following template:
-
-{format}";
-
-        return toolCallInstruction;
+Begin your research now by executing the #Retrieve tool with the query: ""{query}""";
     }
 }
