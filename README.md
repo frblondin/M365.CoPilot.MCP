@@ -14,6 +14,7 @@ A **Model Context Protocol (MCP) Server** that provides secure and compliant acc
 - **Azure AD Authentication**: Secure authentication with support for interactive browser and token caching
 - **Configurable Results**: Customize the number of results and target specific data connectors
 - **Cross-Platform**: Built on .NET 10 with cross-platform support
+- **Pre-built Prompts**: 10 specialized prompts for common organizational knowledge scenarios
 
 ## 📋 Prerequisites
 
@@ -112,6 +113,88 @@ The primary tool provided by this MCP server:
   "connectionIds": ["confluence-connector"],
   "maximumNumberOfResults": 10
 }
+```
+
+## 📋 Pre-built Prompts
+
+The MCP server includes 10 specialized prompts designed for common organizational knowledge scenarios. These prompts provide structured search queries and response formatting to help you quickly find relevant information.
+
+### 🔬 Research & Development
+
+#### `project_research`
+Research project documentation, best practices, and technical resources across your organization's knowledge base.
+- **Use for**: Development standards, architecture decisions, project-related documentation
+- **Example**: `#project_research "mobile app development"`
+
+#### `code_standards`
+Access coding standards, architecture guidelines, and technical best practices from your organization.
+- **Use for**: Development conventions, architectural decisions, style guides
+- **Example**: `#code_standards "React development"`
+
+#### `integration_patterns`
+Find integration patterns, API documentation, and system integration guides from your technical resources.
+- **Use for**: System connections, data flows, API implementations
+- **Example**: `#integration_patterns "payment system integration"`
+
+### 🔧 Operations & DevOps
+
+#### `troubleshooting_guide`
+Find troubleshooting guides, error solutions, and technical documentation for resolving common issues.
+- **Use for**: Debugging procedures, error resolution, problem-solving steps
+- **Example**: `#troubleshooting_guide "authentication errors"`
+
+#### `devops_procedures`
+Access DevOps procedures, deployment guides, and infrastructure documentation.
+- **Use for**: CI/CD pipelines, deployment strategies, operational procedures
+- **Example**: `#devops_procedures "container deployment"`
+
+### 🏢 Business & Compliance
+
+#### `business_process`
+Retrieve business process documentation, workflows, and operational procedures from your organization.
+- **Use for**: Company processes, compliance requirements, workflow documentation
+- **Example**: `#business_process "customer onboarding"`
+
+#### `compliance_documentation`
+Find compliance procedures, audit documentation, and regulatory guidelines from your organization.
+- **Use for**: Security requirements, privacy policies, regulatory compliance
+- **Example**: `#compliance_documentation "GDPR compliance"`
+
+### 📊 Intelligence & Analytics
+
+#### `competitive_intelligence`
+Research market analysis, competitor information, and business intelligence from internal reports.
+- **Use for**: Market insights, competitive positioning, business strategy
+- **Example**: `#competitive_intelligence "mobile payment market"`
+
+#### `customer_insights`
+Research customer feedback, survey results, and user research findings from your knowledge base.
+- **Use for**: Customer satisfaction, user experience, product feedback analysis
+- **Example**: `#customer_insights "user experience feedback"`
+
+### 📚 Learning & Development
+
+#### `training_resources`
+Access training materials, onboarding guides, and learning resources from your organization.
+- **Use for**: Educational content, skill development, certification programs
+- **Example**: `#training_resources "cloud platform training"`
+
+### 🎯 How to Use Prompts
+
+Each prompt generates a structured search query and provides formatting guidance for responses. When you use a prompt:
+
+1. **Execute the prompt**: `#prompt_name "your specific topic"`
+2. **Review the generated query**: The prompt will show you the search query it created
+3. **Run the search**: Use the provided `#Retrieve` command to execute the search
+4. **Get formatted results**: Results will be structured according to the prompt's template
+
+**Example workflow**:
+```
+> #project_research "API design patterns"
+📋 Search Query: `project documentation best practices guidelines standards for API design patterns`
+
+To execute this search, use:
+#Retrieve "project documentation best practices guidelines standards for API design patterns"
 ```
 
 ## 🏗️ Architecture
